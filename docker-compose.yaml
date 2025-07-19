@@ -56,7 +56,7 @@ services:
       start_period: 30s
     restart: always
     depends_on:
-      <<: *airflow-common-depends-on
+      <<: *airflow-common-depends_on
       airflow-init: # Chỉ chạy khi airflow-init khởi động
         condition: service_completed_successfully
 
@@ -65,7 +65,7 @@ services:
     command: scheduler # Chạy scheduler (DAG tự chạy theo thời gian)
     restart: always
     depends_on:
-      <<: *airflow-common-depends-on
+      <<: *airflow-common-depends_on
       airflow-init:
         condition: service_completed_successfully
 
@@ -123,7 +123,7 @@ services:
         exec /entrypoint airflow version
     # yamllint enable rule:line-length
     environment:
-      <<: *airflow-common
+      <<: *airflow-common-env
       _AIRFLOW_DB_MIGRATE: 'true'
       _AIRFLOW_WWW_USER_CREATE: 'true'
       # tài khoản web airflow
