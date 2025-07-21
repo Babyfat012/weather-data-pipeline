@@ -1,0 +1,54 @@
+[2025-07-20T19:36:53.472+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-20T19:36:53.500+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_weather_forecast.load_staging_to_mysql scheduled__2025-07-20T12:00:00+00:00 [queued]>
+[2025-07-20T19:36:53.509+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_weather_forecast.load_staging_to_mysql scheduled__2025-07-20T12:00:00+00:00 [queued]>
+[2025-07-20T19:36:53.510+0000] {taskinstance.py:2306} INFO - Starting attempt 2 of 3
+[2025-07-20T19:36:53.521+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_staging_to_mysql> on 2025-07-20 12:00:00+00:00
+[2025-07-20T19:36:53.529+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'fetch_weather_forecast', 'load_staging_to_mysql', 'scheduled__2025-07-20T12:00:00+00:00', '--job-id', '24', '--raw', '--subdir', 'DAGS_FOLDER/fetch_weather_data.py', '--cfg-path', '/tmp/tmpo52ipvu_']
+[2025-07-20T19:36:53.531+0000] {standard_task_runner.py:91} INFO - Job 24: Subtask load_staging_to_mysql
+[2025-07-20T19:36:53.532+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=2531) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-07-20T19:36:53.533+0000] {standard_task_runner.py:63} INFO - Started process 2534 to run task
+[2025-07-20T19:36:53.579+0000] {task_command.py:426} INFO - Running <TaskInstance: fetch_weather_forecast.load_staging_to_mysql scheduled__2025-07-20T12:00:00+00:00 [running]> on host f9d4569dfd57
+[2025-07-20T19:36:53.654+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_weather_forecast' AIRFLOW_CTX_TASK_ID='load_staging_to_mysql' AIRFLOW_CTX_EXECUTION_DATE='2025-07-20T12:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='2' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-20T12:00:00+00:00'
+[2025-07-20T19:36:53.655+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-20T19:36:53.656+0000] {logging_mixin.py:188} INFO - Đang load file: /opt/***/data/weather_20250720_193015.csv
+[2025-07-20T19:36:53.699+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-20T19:36:53.700+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/mysql/connector/connection_cext.py", line 697, in cmd_query
+    self._cmysql.query(
+_mysql_connector.MySQLInterfaceError: Unknown column 'nan' in 'field list'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/load_to_staging_mysql.py", line 60, in load_staging_to_mysql
+    cursor.execute(query, values)
+  File "/home/airflow/.local/lib/python3.12/site-packages/mysql/connector/cursor_cext.py", line 372, in execute
+    result = self._cnx.cmd_query(
+             ^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/mysql/connector/opentelemetry/context_propagation.py", line 111, in wrapper
+    result = method(cnx, *args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/mysql/connector/connection_cext.py", line 705, in cmd_query
+    raise get_mysql_exception(
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'nan' in 'field list'
+[2025-07-20T19:36:53.717+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_weather_forecast, task_id=load_staging_to_mysql, run_id=scheduled__2025-07-20T12:00:00+00:00, execution_date=20250720T120000, start_date=20250720T193653, end_date=20250720T193653
+[2025-07-20T19:36:53.727+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 24 for task load_staging_to_mysql (1054 (42S22): Unknown column 'nan' in 'field list'; 2534)
+[2025-07-20T19:36:53.747+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-20T19:36:53.760+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-20T19:36:53.764+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

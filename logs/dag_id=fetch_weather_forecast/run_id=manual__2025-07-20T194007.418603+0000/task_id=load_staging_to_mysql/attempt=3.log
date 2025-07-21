@@ -1,0 +1,19 @@
+[2025-07-20T19:50:30.198+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-20T19:50:30.223+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_weather_forecast.load_staging_to_mysql manual__2025-07-20T19:40:07.418603+00:00 [queued]>
+[2025-07-20T19:50:30.230+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_weather_forecast.load_staging_to_mysql manual__2025-07-20T19:40:07.418603+00:00 [queued]>
+[2025-07-20T19:50:30.231+0000] {taskinstance.py:2306} INFO - Starting attempt 3 of 3
+[2025-07-20T19:50:30.242+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): load_staging_to_mysql> on 2025-07-20 19:40:07.418603+00:00
+[2025-07-20T19:50:30.249+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'fetch_weather_forecast', 'load_staging_to_mysql', 'manual__2025-07-20T19:40:07.418603+00:00', '--job-id', '34', '--raw', '--subdir', 'DAGS_FOLDER/fetch_weather_data.py', '--cfg-path', '/tmp/tmp2xlpzh8i']
+[2025-07-20T19:50:30.252+0000] {standard_task_runner.py:91} INFO - Job 34: Subtask load_staging_to_mysql
+[2025-07-20T19:50:30.252+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=176) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-07-20T19:50:30.253+0000] {standard_task_runner.py:63} INFO - Started process 178 to run task
+[2025-07-20T19:50:30.295+0000] {task_command.py:426} INFO - Running <TaskInstance: fetch_weather_forecast.load_staging_to_mysql manual__2025-07-20T19:40:07.418603+00:00 [running]> on host 74203d08dcb8
+[2025-07-20T19:50:30.376+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_weather_forecast' AIRFLOW_CTX_TASK_ID='load_staging_to_mysql' AIRFLOW_CTX_EXECUTION_DATE='2025-07-20T19:40:07.418603+00:00' AIRFLOW_CTX_TRY_NUMBER='3' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-20T19:40:07.418603+00:00'
+[2025-07-20T19:50:30.377+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-20T19:50:30.402+0000] {logging_mixin.py:188} INFO - Không tìm thấy file nào
+[2025-07-20T19:50:30.402+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-07-20T19:50:30.403+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-20T19:50:30.415+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=fetch_weather_forecast, task_id=load_staging_to_mysql, run_id=manual__2025-07-20T19:40:07.418603+00:00, execution_date=20250720T194007, start_date=20250720T195030, end_date=20250720T195030
+[2025-07-20T19:50:30.468+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-07-20T19:50:30.481+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-20T19:50:30.483+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

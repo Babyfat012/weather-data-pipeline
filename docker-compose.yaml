@@ -10,7 +10,7 @@ x-airflow-common:
     AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:airflow@postgres/airflow
     AIRFLOW__CORE__FERNET_KEY: ''
     AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: 'true'
-    AIRFLOW__CORE__LOAD_EXAMPLES: 'true' # hiển thị các DAG mẫu
+    AIRFLOW__CORE__LOAD_EXAMPLES: 'false' # hiển thị các DAG mẫu
     AIRFLOW__API__AUTH_BACKENDS: 'airflow.api.auth.backend.basic_auth,airflow.api.auth.backend.session'
     AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: 'true'
     _PIP_ADDITIONAL_REQUIREMENTS: ${_PIP_ADDITIONAL_REQUIREMENTS:-}
@@ -19,6 +19,7 @@ x-airflow-common:
     - ${AIRFLOW_PROJ_DIR:-.}/logs:/opt/airflow/logs
     - ${AIRFLOW_PROJ_DIR:-.}/config:/opt/airflow/config
     - ${AIRFLOW_PROJ_DIR:-.}/plugins:/opt/airflow/plugins
+    - ${AIRFLOW_PROJ_DIR:-.}/staging_db:/opt/airflow/staging_db # mount file tạo bảng từ máy local vào môi trường container trong Docker
   user: "${AIRFLOW_UID:-50000}:0"
   depends_on:
     &airflow-common-depends_on
@@ -147,10 +148,23 @@ services:
       - bash
       - -c
       - airflow
+  mysql:
+    image: mysql:8.0
+    container_name: mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_DATABASE=staging_db
+      - MYSQL_ROOT_USER=root
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_PASSWORD=admin
 
 volumes: # lưu database PostgreSQL
   postgres-db-volumes:
-
+  mysql_data: {}
 
 
 

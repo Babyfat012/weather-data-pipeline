@@ -1,0 +1,55 @@
+[2025-07-21T02:32:04.594+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-21T02:32:04.630+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_weather_forecast.create_staging_table scheduled__2025-07-20T18:00:00+00:00 [queued]>
+[2025-07-21T02:32:04.650+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_weather_forecast.create_staging_table scheduled__2025-07-20T18:00:00+00:00 [queued]>
+[2025-07-21T02:32:04.652+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-07-21T02:32:04.665+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): create_staging_table> on 2025-07-20 18:00:00+00:00
+[2025-07-21T02:32:04.675+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'fetch_weather_forecast', 'create_staging_table', 'scheduled__2025-07-20T18:00:00+00:00', '--job-id', '58', '--raw', '--subdir', 'DAGS_FOLDER/fetch_weather_data.py', '--cfg-path', '/tmp/tmpho2cl41z']
+[2025-07-21T02:32:04.678+0000] {standard_task_runner.py:91} INFO - Job 58: Subtask create_staging_table
+[2025-07-21T02:32:04.678+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=178) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-07-21T02:32:04.679+0000] {standard_task_runner.py:63} INFO - Started process 180 to run task
+[2025-07-21T02:32:04.731+0000] {task_command.py:426} INFO - Running <TaskInstance: fetch_weather_forecast.create_staging_table scheduled__2025-07-20T18:00:00+00:00 [running]> on host 3f0354c114aa
+[2025-07-21T02:32:04.825+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_weather_forecast' AIRFLOW_CTX_TASK_ID='create_staging_table' AIRFLOW_CTX_EXECUTION_DATE='2025-07-20T18:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-07-20T18:00:00+00:00'
+[2025-07-21T02:32:04.826+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-21T02:32:12.855+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-21T02:32:12.858+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/mysql/connector/connection_cext.py", line 327, in _open_connection
+    self._cmysql.connect(**cnx_kwargs)
+_mysql_connector.MySQLInterfaceError: Unknown MySQL server host 'mysql' (-3)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/load_to_staging_mysql.py", line 7, in create_staging_table
+    conn = mysql.connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/mysql/connector/pooling.py", line 322, in connect
+    return CMySQLConnection(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/mysql/connector/connection_cext.py", line 144, in __init__
+    self.connect(**kwargs)
+  File "/home/airflow/.local/lib/python3.12/site-packages/mysql/connector/abstracts.py", line 1360, in connect
+    self._open_connection()
+  File "/home/airflow/.local/lib/python3.12/site-packages/mysql/connector/connection_cext.py", line 332, in _open_connection
+    raise get_mysql_exception(
+mysql.connector.errors.DatabaseError: 2005 (HY000): Unknown MySQL server host 'mysql' (-3)
+[2025-07-21T02:32:12.880+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=fetch_weather_forecast, task_id=create_staging_table, run_id=scheduled__2025-07-20T18:00:00+00:00, execution_date=20250720T180000, start_date=20250721T023204, end_date=20250721T023212
+[2025-07-21T02:32:12.892+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 58 for task create_staging_table (2005 (HY000): Unknown MySQL server host 'mysql' (-3); 180)
+[2025-07-21T02:32:12.928+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 1
+[2025-07-21T02:32:12.946+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-07-21T02:32:12.949+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

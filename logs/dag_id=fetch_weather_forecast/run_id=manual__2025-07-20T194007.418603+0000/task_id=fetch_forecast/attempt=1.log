@@ -1,0 +1,28 @@
+[2025-07-20T19:40:09.253+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-07-20T19:40:09.278+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: fetch_weather_forecast.fetch_forecast manual__2025-07-20T19:40:07.418603+00:00 [queued]>
+[2025-07-20T19:40:09.286+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: fetch_weather_forecast.fetch_forecast manual__2025-07-20T19:40:07.418603+00:00 [queued]>
+[2025-07-20T19:40:09.287+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 3
+[2025-07-20T19:40:09.297+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): fetch_forecast> on 2025-07-20 19:40:07.418603+00:00
+[2025-07-20T19:40:09.305+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'fetch_weather_forecast', 'fetch_forecast', 'manual__2025-07-20T19:40:07.418603+00:00', '--job-id', '26', '--raw', '--subdir', 'DAGS_FOLDER/fetch_weather_data.py', '--cfg-path', '/tmp/tmpe3s5neh6']
+[2025-07-20T19:40:09.307+0000] {standard_task_runner.py:91} INFO - Job 26: Subtask fetch_forecast
+[2025-07-20T19:40:09.308+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:61 DeprecationWarning: This process (pid=693) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-07-20T19:40:09.308+0000] {standard_task_runner.py:63} INFO - Started process 695 to run task
+[2025-07-20T19:40:09.348+0000] {task_command.py:426} INFO - Running <TaskInstance: fetch_weather_forecast.fetch_forecast manual__2025-07-20T19:40:07.418603+00:00 [running]> on host 10a485cc97df
+[2025-07-20T19:40:09.418+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='fetch_weather_forecast' AIRFLOW_CTX_TASK_ID='fetch_forecast' AIRFLOW_CTX_EXECUTION_DATE='2025-07-20T19:40:07.418603+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-07-20T19:40:07.418603+00:00'
+[2025-07-20T19:40:09.420+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-07-20T19:40:09.955+0000] {logging_mixin.py:188} INFO - Failed for Ho Chi Minh: 429
+[2025-07-20T19:40:10.893+0000] {logging_mixin.py:188} INFO - Failed for Ha Noi: 429
+[2025-07-20T19:40:11.815+0000] {logging_mixin.py:188} INFO - Failed for Da Nang: 429
+[2025-07-20T19:40:12.764+0000] {logging_mixin.py:188} INFO - Failed for Hue: 429
+[2025-07-20T19:40:13.692+0000] {logging_mixin.py:188} INFO - Failed for Hai Phong: 429
+[2025-07-20T19:40:14.607+0000] {logging_mixin.py:188} INFO - Failed for Can Tho: 429
+[2025-07-20T19:40:15.520+0000] {logging_mixin.py:188} INFO - Failed for Bien Hoa: 429
+[2025-07-20T19:40:16.445+0000] {logging_mixin.py:188} INFO - Failed for Quang Ninh: 429
+[2025-07-20T19:40:17.363+0000] {logging_mixin.py:188} INFO - Failed for Nghe An: 429
+[2025-07-20T19:40:18.328+0000] {logging_mixin.py:188} INFO - Failed for Ninh Binh: 429
+[2025-07-20T19:40:18.841+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-07-20T19:40:18.842+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-07-20T19:40:18.852+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=fetch_weather_forecast, task_id=fetch_forecast, run_id=manual__2025-07-20T19:40:07.418603+00:00, execution_date=20250720T194007, start_date=20250720T194009, end_date=20250720T194018
+[2025-07-20T19:40:18.882+0000] {local_task_job_runner.py:240} INFO - Task exited with return code 0
+[2025-07-20T19:40:18.901+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-07-20T19:40:18.904+0000] {local_task_job_runner.py:222} INFO - ::endgroup::
