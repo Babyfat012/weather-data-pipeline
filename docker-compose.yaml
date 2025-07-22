@@ -162,10 +162,31 @@ services:
       - MYSQL_PASSWORD=admin
       - MYSQL_ROOT_PASSWORD=admin
 
+  de_psql: # de - postgreSQL
+    image: postgres:14-alpine
+    container_name: de_psql
+    hostname: de_psql
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+      - ./pg_hba.conf:/tmp/pg_hba.conf
+      - ./postgresql.conf:/tmp/postgresql.conf
+    command:
+      [
+        "postgres",
+        "-c", "config_file=/tmp/postgresql.conf",
+        "-c", "hba_file=/tmp/pg_hba.conf"
+      ] # ghi đè command mặc định để postgreSQL sử dụng file pg_hba.conf
+    expose:
+      - "5433"
+    ports:
+      - "5433:5432"
+    env_file:
+      - .env
+
 volumes: # lưu database PostgreSQL
   postgres-db-volumes:
   mysql_data: {}
-
+  postgres_data: {}
 
 
 

@@ -1,0 +1,67 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/27.0.9 Chrome/134.0.6998.205 Electron/35.4.0 Safari/537.36" version="27.0.9">
+  <diagram name="Page-1" id="dWptHSYmV3DlmZDUoRb2">
+    <mxGraphModel dx="1042" dy="626" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-2" value="&lt;b&gt;Data Source&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="220" y="330" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-5" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="w9OBWnvoPcG9n4UeqOrD-19" target="w9OBWnvoPcG9n4UeqOrD-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="520" y="308" as="sourcePoint" />
+            <mxPoint x="600" y="438" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-6" value="Transform" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="570" y="278" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-7" value="PostgreSQL" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="770" y="278" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-8" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="w9OBWnvoPcG9n4UeqOrD-6" target="w9OBWnvoPcG9n4UeqOrD-7">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="670" y="358" as="sourcePoint" />
+            <mxPoint x="720" y="308" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-9" value="Analyze + Visualize" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="950" y="278" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-10" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="w9OBWnvoPcG9n4UeqOrD-7" target="w9OBWnvoPcG9n4UeqOrD-9">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="930" y="308" as="sourcePoint" />
+            <mxPoint x="980" y="258" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-11" value="Cleaned&lt;div&gt;Data&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="690" y="268" width="70" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-12" value="API" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="200" y="295" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-15" value="Load" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="695" y="308" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-19" value="Staging: MySQL" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="295" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-22" value="" style="endArrow=classic;html=1;rounded=0;" edge="1" parent="1" source="w9OBWnvoPcG9n4UeqOrD-12" target="w9OBWnvoPcG9n4UeqOrD-19">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="510" y="360" as="sourcePoint" />
+            <mxPoint x="560" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-23" value="Extract" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="320" y="308" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-24" value="&lt;b&gt;Data&lt;/b&gt;&lt;div&gt;&lt;b&gt;Warehouse&lt;/b&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="800" y="340" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="w9OBWnvoPcG9n4UeqOrD-25" value="&lt;b&gt;Power BI&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="980" y="340" width="60" height="30" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

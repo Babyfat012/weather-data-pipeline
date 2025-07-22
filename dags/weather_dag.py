@@ -6,6 +6,9 @@ import os
 import mysql.connector
 import logging
 import numpy as np
+import psycopg2
+
+
 LOCATIONS = [
     {"lat": 10.762622, "lon": 106.660172, "name":"Ho Chi Minh"},
     {"lat": 21.028511, "lon": 105.804817, "name":"Ha Noi"},
@@ -132,9 +135,77 @@ def fetch_weather_data():
         cursor.close()
         conn.close()
     logging.info(f"Đã insert {len(df)} dòng dữ liệu thời tiết")
-# tạo 1 DAG có nhiệm vụ gọi hàm fetch_weather_data 
+
+def transform_and_load():
+    logging.info("Bắt đầu transform và load dữ liệu")
+
+    # 1. Kết nối đến mySQL để lấy staging data
+    mysql_conn = mysql.connector.connect(
+        host="mysql",
+        user="admin",
+        password="admin",
+        database="staging_db"
+    )
+
+    df = pd.read_sql("SELECT * FROM staging_weather_data", con=mysql_conn)
+    mysql_conn.close()
+
+    if df.empty:
+        logging.warning("Không có data trong bảng staging")
+        return
+
+    # 2. transform
+    logging.info("Xử lý dữ liệu...")
+
+    # chuyển về datetime
+    df["forecast_time"] = pd.to_datetime(df["forecast_time"])
+
+    #chuyển nan thành none để insert vào postgreSQL
+    df = df.where(pd.notnull(df), None)
+    df = df.replace({np.nan: None}) 
+    # fill giá trị trống thành 0
+    df["ezHeatStressIndex"] = df["ezHeatStressIndex"].fillna(0)
+
+    # 3. kết nối postgreSQL
+    pg_conn = psycopg2.connect(
+        host="de_psql",
+        user="admin",
+        password="admin",
+        dbname="weather_db"
+    )
+    cursor = pg_conn.cursor() # thực thi lệnh sql
+
+    insert_query = """
+        INSERT INTO weather_data (
+            name, forecast_time, temperature, temperature_apparent,
+            dew_point, humidity, wind_speed, wind_direction, wind_gust,
+            pressure_surface_level, cloud_cover, precipitation_probability,
+            uv_index, ez_heat_stress_index
+        ) VALUES (
+            %s, %s, %s, %s,
+            %s, %s, %s, %s, %s,
+            %s, %s, %s,
+            %s, %s
+        )
+    """
+
+    # --- 4. Insert từng dòng ---
+    for _, row in df.iterrows():
+        values = (
+            row["name"], row["forecast_time"], row["temperature"], row["temperatureApparent"],
+            row["dewPoint"], row["humidity"], row["windSpeed"], row["windDirection"], row["windGust"],
+            row["pressureSurfaceLevel"], row["cloudCover"], row["precipitationProbability"],
+            row["uvIndex"], row["ezHeatStressIndex"]
+        )
+        cursor.execute(insert_query, values)
+
+    pg_conn.commit()
+    cursor.close()
+    pg_conn.close()
+
+    logging.info(f"Đã ghi {len(df)} dòng vào bảng weather_db")
 with DAG (
-    dag_id = "fetch_weather_foreacst_dag",
+    dag_id = "weather_dag",
     start_date = datetime(2025, 7, 18),
     schedule_interval="0 */6 * * *", # mỗi 6h
     catchup=False, # DAG chỉ chạy từ hiện tại trở đi
@@ -150,5 +221,10 @@ with DAG (
         task_id = "fetch_forecast",
         python_callable=fetch_weather_data
     )
-    create_table_task >> fetch_task   # thiết lập thứ tự tasks
+
+    transform_load = PythonOperator(
+        task_id = "transform_and_load",
+        python_callable=transform_and_load
+    )
+    create_table_task >> fetch_task >> transform_load   # thiết lập thứ tự tasks
 
