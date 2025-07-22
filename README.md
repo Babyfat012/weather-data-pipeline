@@ -28,31 +28,8 @@ Dự án này mô tả 1 vài kỹ năng chính của DE trong việc tạo 1 pi
 - Apache Airflow
 - Requests
 
+## Airflow UI
+![Airflow UI](airflow.png)
 
-## File system
-├── weather-data-pipeline/
-│   ├── .env
-│   ├── .gitignore
-│   ├── airflow.png
-│   ├── docker-compose.yaml
-│   ├── docker.png
-│   ├── pg_hba.conf
-│   ├── postgresql.conf
-│   ├── Project 2_ Weather ETL Pipeline.docx
-│   ├── README.md
-│   ├── requirements.txt
-│   ├── test.ipynb
-│   ├── weather_data.csv
-│   ├── staging_db/
-│   │   ├── staging_weather_db.sql
-│   │   └── weather_dw.sql
-│   ├── scripts/
-│   │   └── extract.py
-│   ├── diagram/
-│   │   ├── .$weather-diagram.drawio.bkp
-│   │   ├── dags.drawio
-│   │   ├── etl-diagram.drawio
-│   │   └── weather-diagram.drawio
-│   └── dags/
-│       └── weather_dag.py
-└── logs/
+## Docker 
+![Docker UI](docker.png)
